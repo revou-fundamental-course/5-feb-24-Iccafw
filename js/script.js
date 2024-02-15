@@ -1,35 +1,73 @@
-document.getElementById('suhu-form').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevents the default form submission behavior
+function btnClickKonversi() {
+    var inputField = document.getElementById("input-field").value;
+    var resultField = document.getElementById("result-field");
+    var keteranganField = document.getElementById("keterangan-field");
+    var pesanError = document.getElementById("pesanError");
+    var labelInput1 = document.getElementById("labelInput1");
 
-    // Get input value
-    var suhuInput = parseFloat(document.getElementById('suhu').value);
+    if (inputField === "") {
+        pesanError.textContent = "Input tidak boleh kosong!";
+        resultField.value = "";
+        keteranganField.value = "";
+        return;
+    } else {
+        pesanError.textContent = "";
+    }
 
-    if (isNaN(suhuInput)) {
-        alert("Please enter a valid number for temperature.");
+    var inputNumber = parseFloat(inputField);
+
+    if (isNaN(inputNumber)) {
+        pesanError.textContent = "Input harus berupa angka!";
+        resultField.value = "";
+        keteranganField.value = "";
         return;
     }
 
-    // Perform temperature conversion
-    var suhuCelcius = convertToCelsius(suhuInput);
-    var suhuFahrenheit = convertToFahrenheit(suhuInput);
+    if (labelInput1.textContent.includes("Celcius")) {
+        var hasil = (inputNumber * 9 / 5) + 32;
+        resultField.value = hasil.toFixed(2);
+        keteranganField.value = `(${inputNumber} * 9/5) + 32`;
+    } else {
+        var hasil = (inputNumber - 32) * 5 / 9;
+        resultField.value = hasil.toFixed(2);
+        keteranganField.value = `(${inputNumber} - 32) * 5/9`;
+    }
+}
 
-    // Display results
-    document.getElementById('hasil-celcius').innerText = "Suhu dalam Celcius: " + suhuCelcius.toFixed(2) + "°C";
-    document.getElementById('hasil-fahrenheit').innerText = "Suhu dalam Fahrenheit: " + suhuFahrenheit.toFixed(2) + "°F";
+function btnClickReset() {
+    var inputField = document.getElementById("input-field");
+    var resultField = document.getElementById("result-field");
+    var keteranganField = document.getElementById("keterangan-field");
 
-    // Show the result container
-    document.getElementById('hasil').style.display = 'block';
+    inputField.value = "";
+    resultField.value = "";
+    keteranganField.value = "";
+    pesanError.textContent = "";
+}
+
+function btnClickReverse() {
+    var labelInput1 = document.getElementById("labelInput1");
+    var labelInput2 = document.getElementById("labelInput2");
+
+    if (labelInput1.textContent.includes("Celcius")) {
+        labelInput1.textContent = "Fahrenheit \u00B0F:";
+        labelInput2.textContent = "Celcius \u00B0C:";
+    } else {
+        labelInput1.textContent = "Celcius \u00B0C:";
+        labelInput2.textContent = "Fahrenheit \u00B0F:";
+    }
+}
+
+// Mendapatkan elemen subjudul dan paragraf
+var caraKonversi = document.getElementById("caraKonversi");
+var teksCaraKonversi = document.getElementById("teksCaraKonversi");
+
+// Menambahkan event listener ke subjudul
+caraKonversi.addEventListener("click", function () {
+    // Memeriksa apakah paragraf sedang tersembunyi
+    teksCaraKonversi.classList.toggle("hidden");
 });
 
-function resetForm() {
-    document.getElementById('suhu-form').reset();
-    document.getElementById('hasil').style.display = 'none';
-}
-
-function convertToFahrenheit(celsius) {
-    return (celsius * 9 / 5) + 32;
-}
-
-function convertToCelsius(fahrenheit) {
-    return (fahrenheit - 32) * 5 / 9;
-}
+// Inisialisasi kondisi untuk btnClickReverse
+btnClickReverse(true); // Kondisi X terjadi, maka fungsi baru dijalankan
+// btnClickReverse(false); // Kondisi X tidak terjadi, maka fungsi lama dijalankan
