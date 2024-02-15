@@ -1,53 +1,106 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
+:root {
+    --main-bg-color: pink;
+    --button-hover-bg: red;
+    --button-shadow: red;
+  }
+  
+  body {
+    padding: 60px;
+    margin: auto;
+    width: fit-content;
+    background: linear-gradient(to right, white, pink);
+    color: black;
     text-align: center;
-}
+  }
+    
+  .input-row {
+    display: flex;
+  }
+  
+  .input-section {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .input-section:last-child {
+    margin-right: 9;
+  }
+  
 
-form {
+  #prolog {
+    width: 2050px;
+  }
+  
+  #Navigation {
+    display: flex;
+  }
+  
+  #Navigation > a {
+    text-decoration: none;
+    padding: 100px;
+  }
+  
+  #Navigation:hover {
+    color: red;
+  }
+  
+  /* Input Section */
+  .input-section {
     display: flex;
     flex-direction: column;
-}
-
-label {
-    margin-bottom: 10px;
-}
-
-input {
-    margin-bottom: 15px;
+  }
+  
+  #input-field,
+  #result-field,
+  #keterangan-field {
+    outline: none;
+    border-radius: 8px;
+    border: solid black;
+    padding: 4px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  #input-field:focus,
+  #result-field:focus,
+  #keterangan-field:focus {
+    border: solid blue;
+    box-shadow: 0 0 8px var(--button-shadow);
+  }
+  
+  .result-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .my-button {
+    background-color: var(--main-bg-color);
+    color: black;
+    border-radius: 8px;
+    border: none;
     padding: 10px;
-    font-size: 16px;
-}
-
-button {
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#result {
+    width: 100%;
     text-align: center;
-}
-
-#hasil {
-    display: none;
-}
-
-#hasil h2 {
-    text-align: center;
-}
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .my-button:hover {
+    background-color: var(--button-hover-bg);
+    transform: scale(1.05);
+  }
+  
+  .my-button:active {
+    background-color: var(--button-hover-bg);
+    transform: translateY(2px);
+  }
+  
+  #pesanError {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f00;
+  }
+  
+  .container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
